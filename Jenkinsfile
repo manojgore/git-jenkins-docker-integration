@@ -6,6 +6,11 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Cleanup') {
+            steps {
+                bat 'docker rm -f $(docker ps -q)'
+            }
+        }
         stage('Build Image') {
             steps {
                 bat 'docker build -t myimage .'
