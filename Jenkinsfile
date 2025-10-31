@@ -1,14 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout Code'){
-            steps{
-                checkout scm
+        stage('Checkout Code') {
+            steps {
+                git url: 'https://github.com/manojgore/git-jenkins-docker-integration.git',
             }
         }
-        stage('Extract Data'){
-            steps{
-                bat "C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python313\\python.exe etl.py"
+        stage('Build Image') {
+            steps {
+                bat 'docker build t myimage'
+            }
+        }
+        stage('Create Container') {
+            steps {
+                bat 'docker run -d -p 8501:8501 myimage'
             }
         }
     }
