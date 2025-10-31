@@ -8,8 +8,7 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                bat 'docker rm -f $(docker ps -a -q) || true'
-                bat 'docker rmi -f myimage || true'
+                sh 'docker rm -f $(docker ps -a -q)'
             }
         }
         stage('Build Image') {
