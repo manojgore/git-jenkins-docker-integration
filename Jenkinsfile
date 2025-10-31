@@ -8,7 +8,9 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                sh 'docker rm -f $(docker ps -a -q)'
+                bat '''
+                 for /f %%i in ('docker ps -aq') do docker rm -f %%i
+                '''
             }
         }
         stage('Build Image') {
