@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/manojgore/git-jenkins-docker-integration.git',
+                checkout scm
             }
         }
         stage('Build Image') {
